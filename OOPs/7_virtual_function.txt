@@ -1,0 +1,57 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+// Base class
+class Media {
+public:
+    Media(std::string t, double p) : title(t), price(p) {}
+    virtual void display() {
+        cout << "Title: " << title << ", Price: " << price << endl;
+    }
+protected:
+    string title;
+    double price;
+};
+
+// Derived class for Book
+class Book : public Media {
+public:
+    Book(std::string t, double p, int n) : Media(t, p), numPages(n) {}
+    void display() {
+        Media::display();
+        cout << "Number of pages: " << numPages << endl;
+    }
+private:
+    int numPages;
+};
+
+// Derived class for Video Tape
+class VideoTape : public Media {
+public:
+    VideoTape(std::string t, double p, int l) : Media(t, p), length(l) {}
+    void display() {
+        Media::display();
+        cout << "Length of tape: " << length << " minutes" << endl;
+    }
+private:
+    int length;
+};
+
+int main() {
+    // Create objects of derived classes
+    Book book("The Great Gatsby", 9.99, 180);
+    VideoTape tape("The Godfather", 14.99, 175);
+
+    // Use polymorphism to call display function
+    Media* mediaArray[2];
+    mediaArray[0] = &book;
+    mediaArray[1] = &tape;
+
+    for (int i = 0; i < 2; i++) {
+        mediaArray[i]->display();
+        std::cout << std::endl;
+    }
+
+    return 0;
+}

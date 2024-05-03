@@ -1,0 +1,24 @@
+#include <iostream>
+using namespace std ;
+
+template <typename T, size_t size>
+T findMin(T (&arr)[size]) {
+    T minVal = arr[0];
+    for (size_t i = 1; i < size; ++i) {
+        if (arr[i] < minVal) {
+            minVal = arr[i];
+        }
+    }
+    return minVal;
+}
+
+int main() {
+    int intArr[] = {5, 2, 8, 1, 6};
+    double doubleArr[] = {3.5, 1.2, 7.8, 0.5, 9.3};
+
+    std::cout << "Minimum value in intArr: " << findMin(intArr) << endl;
+    cout << "Minimum value in doubleArr: " << findMin(doubleArr) << endl;
+
+    return 0;
+}
+

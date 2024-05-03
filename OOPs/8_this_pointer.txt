@@ -1,0 +1,29 @@
+#include <iostream>
+using namespace std;
+
+class Complex
+{
+    int real, imaginary;
+
+  public:
+    Complex &setData(int real, int imaginary)
+    {
+        this->real = real;
+        this->imaginary = imaginary;
+        return *this;
+    }
+    void getData()
+    {
+        cout << "The real part is : " << real << endl;
+        cout << "The imaginary part is : " << imaginary << endl;
+    }
+};
+
+int main()
+{
+    Complex *ptr = new Complex;
+    ptr->setData(10, 20).getData();
+    delete ptr;
+    return 0;
+}
+

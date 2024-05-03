@@ -1,0 +1,53 @@
+#include <iostream>
+#include <vector>
+
+template<typename T>
+class Vector {
+private:
+    std::vector<T> data;
+
+public:
+    // Constructor to create a vector with initial capacity
+    Vector(size_t capacity) : data(capacity) {}
+
+    // Function to modify the value of the given element
+    void setValue(size_t index, T value) {
+        if (index < data.size()) {
+            data[index] = value;
+        } else {
+            std::cerr << "Index out of range." << std::endl;
+        }
+    }
+
+    // Function to multiply the vector by a scalar value
+    Vector<T> multiply(T scalar) {
+        Vector<T> result(data.size());
+        for (size_t i = 0; i < data.size(); i++) {
+            result.data[i] = data[i] * scalar;
+        }
+        return result;
+    }
+
+    // Function to display the vector
+    void display() {
+        for (size_t i = 0; i < data.size(); i++) {
+            std::cout << data[i] << " ";
+        }
+        std::cout << std::endl;
+    }
+};
+
+int main() {
+    Vector<int> vec(5);
+
+    vec.setValue(0, 3);
+    vec.setValue(1, 4);
+    vec.setValue(2, 5);
+
+    vec.display();
+
+    Vector<int> vec_mul = vec.multiply(2);
+    vec_mul.display();
+
+    return 0;
+}

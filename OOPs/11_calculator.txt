@@ -1,0 +1,41 @@
+#include <iostream>
+using namespace std;
+
+class Calculator {
+public:
+    int add(int x, int y) {
+        return x + y;
+    }
+
+    int subtract(int x, int y) {
+        return x - y;
+    }
+
+    int multiply(int x, int y) {
+        return x * y;
+    }
+
+    float divide(int x, int y) {
+        if (y == 0) {
+            cout << "Error: Division by zero!" << endl;
+            return 0; // Returning 0 for division by zero
+        }
+        else {
+            return static_cast<float>(x) / y;
+        }
+    }
+};
+
+int main() {
+    Calculator calculator;
+
+    cout << "1 + 2 = " << calculator.add(1, 2) << endl;
+    cout << "5 - 3 = " << calculator.subtract(5, 3) << endl;
+    cout << "4 * 6 = " << calculator.multiply(4, 6) << endl;
+    cout << "8 / 2 = " << calculator.divide(8, 2) << endl;
+    cout << "Division by zero: ";
+    calculator.divide(5, 0);
+
+    return 0;
+}
+

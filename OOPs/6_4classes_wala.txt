@@ -1,0 +1,93 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// Base class
+class Person {
+protected:
+    string name;
+    int age;
+public:
+    Person(string name, int age) : name(name), age(age) {}
+
+    void display() {
+        cout << "Name: " << name << endl;
+        cout << "Age: " << age << endl;
+    }
+};
+
+// Derived class Account
+class Account : public Person {
+private:
+    double balance;
+public:
+    Account(string name, int age, double balance) : Person(name, age), balance(balance) {}
+
+    void display() {
+        Person::display();
+        cout << "Balance: $" << balance << endl;
+    }
+};
+
+// Derived class Admin
+class Admin : public Person {
+private:
+    string role;
+public:
+    Admin(string name, int age, string role) : Person(name, age), role(role) {}
+
+    void display() {
+        Person::display();
+        cout << "Role: " << role << endl;
+    }
+};
+
+// Derived class Master
+class Master {
+private:
+    Account account;
+    Admin admin;
+public:
+    Master(string accName, int accAge, double balance, string adminName, int adminAge, string role)
+        : account(accName, accAge, balance), admin(adminName, adminAge, role) {}
+
+    void display() {
+        cout << "Account Information:" << endl;
+        account.display();
+        cout << "\nAdmin Information:" << endl;
+        admin.display();
+    }
+
+    // Update account information
+    void updateAccount(string name, int age, double balance) {
+        account = Account(name, age, balance);
+    }
+
+    // Update admin information
+    void updateAdmin(string name, int age, string role) {
+        admin = Admin(name, age, role);
+    }
+};
+
+int main() {
+    // Create a Master object
+    Master master("John", 30, 5000.0, "Admin", 35, "Administrator");
+
+    // Display initial information
+    cout << "Initial Information:" << endl;
+    master.display();
+
+    // Update Account information
+    master.updateAccount("Alice", 25, 7000.0);
+
+    // Update Admin information
+    master.updateAdmin("Bob", 40, "Super Admin");
+
+    // Display updated information
+    cout << "\nUpdated Information:" << endl;
+    master.display();
+
+    return 0;
+}
+

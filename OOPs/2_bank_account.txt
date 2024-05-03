@@ -1,0 +1,67 @@
+#include <iostream>
+using namespace std;
+
+class account{
+  public:
+  string name;
+  long int account_number;
+  string acc_type;
+  int balance = 0;
+
+  account(string n, long int an, string type, int bal){
+    this -> name = n;
+    this -> account_number = an;
+    this -> acc_type = type;
+    this -> balance = bal;
+  }
+
+  void deposite(int value){
+    this -> balance += value;
+
+    cout << "Amount " << value << " is transferred to acount " << endl << "current Balance " << this -> balance << endl;
+
+  }
+
+  void withdraw(int value){
+    if (value > this -> balance){
+      cout << "Not enough money to withdraw" << endl << "Current Balance : " << this -> balance << endl;
+    }
+    else{
+      this -> balance -= value;
+      cout << "Amount of " << value << " is withdrawed" << endl << "Remaining balance : " << this -> balance << endl;
+    }
+  }
+
+  void status(){
+    cout << "Holder's Name : " << this -> name << endl;
+    cout << "Account Number: " << this -> account_number << endl;
+    cout << "Account type : " << this -> acc_type << endl;
+    cout << "Balance : "<< this -> balance << endl; 
+  }
+
+};
+
+int main() {
+
+
+  account Jayesh("Jayesh", 99999999999, "Personal", 25000);
+
+  Jayesh.status();
+  cout << endl;
+  
+  Jayesh.deposite(10000);
+   cout << endl;
+
+  Jayesh.status();
+   cout << endl;
+
+  Jayesh.withdraw(25000);
+   cout << endl;
+
+  Jayesh.withdraw(15000);
+   cout << endl;
+
+  Jayesh.status();
+
+  return 0;
+}

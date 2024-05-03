@@ -1,0 +1,32 @@
+#include <iostream>
+using namespace std;
+class Exception {
+  private:
+    string message;
+  public:
+    Exception(const string& msg) : message(msg) {
+    }
+    string getMessage() const {
+      return message;
+    }
+};
+class Calculator {
+  public:
+    static double divide(double num1, double num2) {
+      if (num2 == 0) {
+        throw Exception("Cannot divide by zero");
+      }
+    return num1 / num2;
+    }
+};
+int main() {
+  try {
+    double result1 = Calculator::divide(50, 2); // No exception
+    cout << "Result 1: " << result1 << endl;
+    double result2 = Calculator::divide(50, 0); // Will throw     Exception
+    cout << "Result 2: " << result2 << endl; // This line will not be executed
+  } catch (const Exception& exp) {
+  cerr << "Error: " << exp.getMessage() << endl;
+  }
+  return 0;
+}

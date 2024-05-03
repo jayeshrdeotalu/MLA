@@ -1,0 +1,25 @@
+#include <iostream>
+using namespace std;
+
+#define pi 3.14
+
+class Area {
+
+public:
+  float get_area(float length, float breath) { return length * breath; }
+
+  float get_area(float r) { return pi * r * r; }
+};
+
+int main() {
+  Area area;
+  float l, b, r;
+  cout << "Enter length and breath of rectangle : ";
+  cin >> l >> b;
+  cout << "Area of rectangle is : " << area.get_area(l, b) << endl;
+  cout << "Enter radius of circle : ";
+  cin >> r;
+  cout << "Area of circlr is : " << area.get_area(r) << endl;
+  return 0;
+}
+

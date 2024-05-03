@@ -1,0 +1,93 @@
+#include <iostream>
+using namespace std;
+
+class DB; // Forward declaration of DB class
+
+class DM {
+
+private:
+  int meters;
+  int centimeters;
+
+public:
+  DM() : meters(0), centimeters(0) {}
+  DM(int m, int cm) : meters(m), centimeters(cm) {}
+
+  friend DM add(const DM &dm, const DB &db);
+
+  void display() {
+
+    cout << "Distance: " << meters << " meters and " << centimeters
+         << "              centimeters" << endl;
+  }
+};
+
+class DB {
+
+private:
+  int feet;
+
+  int inches;
+
+public:
+  DB() : feet(0), inches(0) {}
+
+  DB(int ft, int in) : feet(ft), inches(in) {}
+
+  friend DM add(const DM &dm, const DB &db);
+
+  void display() {
+
+    cout << "Distance: " << feet << " feet and " << inches << " inches" << endl;
+  }
+};
+
+DM add(const DM &dm, const DB &db) {
+
+  int total_meters = dm.meters;
+
+  int total_centimeters = dm.centimeters;
+
+  // Convert DB distance to meters and centimeters
+
+  total_meters += db.feet * 0.3048; // 1 foot = 0.3048 meters
+
+  total_centimeters += db.inches * 2.54; // 1 inch = 2.54 centimeters
+
+  // Adjust meters and centimeters if centimeters exceed 100
+
+  total_meters += total_centimeters / 100;
+
+  total_centimeters %= 100;
+
+  return DM(total_meters, total_centimeters);
+}
+
+int main() {
+
+  // Creating objects of DM and DB
+
+  DM dm(5, 50); // 5 meters and 50 centimeters
+
+  DB db(10, 6); // 10 feet and 6 inches
+
+  // Display original distances
+
+  cout << "Original distances:" << endl;
+
+  dm.display();
+
+  db.display();
+
+  // Adding DM with DB
+
+  DM result = add(dm, db);
+
+  // Displaying result
+
+  cout << "\nResult after addition:" << endl;
+
+  result.display();
+
+  return 0;
+}
